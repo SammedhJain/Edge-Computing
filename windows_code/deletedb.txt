@@ -1,0 +1,15 @@
+import mysql.connector
+from insertdb import *
+
+def delete(a):
+        mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="mysql@123",
+        database="rpi"
+        )
+        mycursor =mydb.cursor()
+        for i in a:
+            query2 = "DELETE FROM ipaddress WHERE ip_addr = %s "
+            mycursor.execute(query2,(i,))
+        mydb.commit()

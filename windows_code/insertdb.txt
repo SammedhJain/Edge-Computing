@@ -1,0 +1,20 @@
+
+import mysql.connector
+def insert11(clients):
+
+    mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="mysql@123",
+    database="rpi"
+    )
+    mycursor =mydb.cursor()
+
+    for i in clients:
+        # print(i)
+        
+        sql = "INSERT INTO ipaddress(ip_addr) VALUES(%s)"
+        mycursor.execute(sql,(i,))
+     
+    mydb.commit()
+    

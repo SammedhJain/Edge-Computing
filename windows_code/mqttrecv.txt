@@ -1,0 +1,47 @@
+import time
+from deletedb import *
+from insertdb import *
+import paho.mqtt.client as mqtt
+# from linker import *
+
+# def on_connect(client, userdata, flags, rc):  # The callback for when the client connects to the broker
+#     print("Connected with result code {0}".format(str(rc)))  # Print result of connection attempt
+#     client.subscribe("topic")  # Subscribe to the topic “digitest/test1”, receive any messages published on it
+ins1=[]
+
+def on_message(client, userdata, msg):  # The callback for when a PUBLISH message is received from the server.
+        #print("Message received-> " + msg.topic + " " + str(msg.payload))  # Print a received msg
+        #print(str(msg.payload.decode("utf-8")))
+        print(msg.topic)
+
+        # if(msg.topic=='delete1'):
+        ins1.append(str(msg.payload.decode("utf-8")))
+        # else:
+        #         ins1.append(str(msg.payload.decode("utf-8")))
+
+
+
+        
+
+
+while True:
+    client = mqtt.Client("dig")  # Create instance of client with client ID “digi_mqtt_test”
+    # client.on_connect = on_connect  # Define callback function for successful connection
+    # client.connect("m2m.eclipse.org", 1883, 60)  # Connect to (broker, port, keepalive-time)
+    client.connect('192.168.1.6', 1883)
+    client.loop_start()
+    client.subscribe("insert")
+
+
+
+    client.on_message = on_message
+#     print(ins1)
+#     insert11(ins1)
+    insert11(ins1)
+    print(ins1)
+    ins1.clear()
+
+    time.sleep(5)
+    client.loop_stop()  # Start networking daemon
+
+
