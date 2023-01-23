@@ -1,0 +1,5 @@
+1. First place all the files in the same folder
+2. if running on rpi run the files as sudo 
+3. install mysql-connector library
+4.install scapy and paho.mqtt.client library 
+5.run the scanner file alone it will trigger all other files automatically
